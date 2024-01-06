@@ -1,4 +1,6 @@
-extension E1 on String {
+import 'dart:math';
+
+extension Epkg1 on String {
   /// return text between [startWord] and [endWord]
   String? extract(String startWord, [String? endWord]) {
     String? result;
@@ -102,7 +104,7 @@ extension E1 on String {
   }
 }
 
-extension E2 on int {
+extension Epkg2 on int {
   int binarySet(int bits) {
     assert(bits != 0);
     return this | bits;
@@ -123,4 +125,11 @@ extension E2 on int {
   }
 
   bool binaryIsNotSet(int bits) => !binaryIsSet(bits);
+}
+
+extension Epkg3 on double {
+  double toPrecision(int nDigit) {
+    assert(nDigit >= 0, "nDigit must be positive");
+    return (this * pow(10, nDigit)).round() / pow(10, nDigit);
+  }
 }
