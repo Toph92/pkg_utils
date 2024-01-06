@@ -2,7 +2,7 @@ library pkg_utils;
 
 //import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:flutter/foundation.dart' show kIsWeb;
+//import 'package:flutter/foundation.dart' show kIsWeb;
 
 //SizedBox voidWidget() => const SizedBox.shrink();
 
@@ -49,6 +49,7 @@ enum EnumPrintColor {
   ;
 }
 
+/*
 class OS {
   static bool isMobile() {
     if (kIsWeb) return false;
@@ -91,3 +92,4 @@ class OS {
     return false;
   }
 }
+*/
