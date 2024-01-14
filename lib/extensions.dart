@@ -129,7 +129,8 @@ extension Epkg2 on int {
 
 extension Epkg3 on double {
   double toPrecision(int nDigit) {
-    assert(nDigit >= 0, "nDigit must be positive");
+    assert(nDigit >= 0, "nDigit must be positive or 0");
+
     return (this * pow(10, nDigit)).round() / pow(10, nDigit);
   }
 }

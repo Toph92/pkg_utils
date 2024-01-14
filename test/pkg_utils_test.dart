@@ -17,6 +17,8 @@ void main() {
     expect(a.toPrecision(2), 2.35);
     expect(a.toPrecision(3), 2.346);
     expect(a.toPrecision(0), 2);
+    expect(a.toStringAsFixed(0), "2");
+    expect(a.toStringAsFixed(1), "2.3");
     expect(a.toPrecision(1), 2.3);
 
     expect(a.toPrecision(1).toString(), "2.3");
