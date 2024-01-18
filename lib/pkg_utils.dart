@@ -32,7 +32,6 @@ void printColor(PrintColor color, String? message, {bool noNewLine = false}) {
   }
   if (noNewLine) {
     stdout.write(sTmp);
-    stdout.close();
   } else {
     print(sTmp);
   }
