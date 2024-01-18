@@ -75,12 +75,39 @@ void main() {
   }));
 
   test('printColor()', (() {
-    printColor(PrintColor.green, "printColor() OK");
+    printColor(
+      PrintColor.red.value,
+      "This is a test",
+    );
 
-    printColor(PrintColor.red, "printColor() without newLine...",
-        PrintColor.green, "OK");
+    printColor(
+      PrintColor.red.value + PrintColor.italic.value,
+      "This is a test",
+    );
+    printColor(
+      PrintColor.white.value + PrintColor.bgGrey.value,
+      "This is a test",
+    );
+
+    printColor(
+      PrintColor.error.value,
+      "This is an error",
+    );
+
+    printColor(
+      PrintColor.warning.value,
+      "This is an warning",
+    );
+
+    printColor(
+      PrintColor.info.value,
+      "This is an information",
+    );
+
+    /* printColor(
+        PrintColor.blinkE, "printColor.blinkError", PrintColor.green, "OK");
 
     printColor(PrintColor.red, "Uno ", PrintColor.green, "Dos ",
-        PrintColor.magenta, "Tres");
+        PrintColor.magenta, "Tres"); */
   }));
 }
