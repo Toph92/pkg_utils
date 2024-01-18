@@ -10,7 +10,7 @@ void printColor(dynamic color, String? message,
   assert(color is PrintColor || color is int);
   if (color is PrintColor) color = color.value;
   if (color2 is PrintColor) color2 = color2.value;
-  if (color3 is PrintColor) color3 = color2.value;
+  if (color3 is PrintColor) color3 = color3.value;
 
   if (color3 != null &&
       message3 != null &&
