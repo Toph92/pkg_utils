@@ -134,3 +134,10 @@ extension Epkg3 on double {
     return (this * pow(10, nDigit)).round() / pow(10, nDigit);
   }
 }
+
+extension WhereNotInExt<T> on Iterable<T> {
+  Iterable<T> whereNotIn(Iterable<T> reject) {
+    final rejectSet = reject.toSet();
+    return where((el) => !rejectSet.contains(el));
+  }
+}
