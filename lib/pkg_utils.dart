@@ -79,7 +79,7 @@ String updateWithColor(int color, String? message) {
         PrintColor.blink.value;
   }
   if (color.binaryIsSet(PrintColor.warning.value)) {
-    sEmoticon = '⚠️';
+    sEmoticon = '⚠️⚠';
     color = PrintColor.yellow.value;
   }
 
