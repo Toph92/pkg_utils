@@ -81,17 +81,17 @@ void main() {
     );
 
     printColor(
-      PrintColor.info.value,
-      "This is an information",
-    );
-
-    printColor(
       PrintColor.red.value + PrintColor.italic.value,
       "This is a test",
     );
     printColor(
       PrintColor.white.value + PrintColor.bgGrey.value,
       "This is a test",
+    );
+
+    printColor(
+      PrintColor.info.value,
+      "This is an information",
     );
 
     printColor(
@@ -103,13 +103,5 @@ void main() {
       PrintColor.warning.value,
       "This is an warning",
     );
-
-    printColor(PrintColor.warning, "Windows login ");
-
-    /* printColor(
-        PrintColor.blinkE, "printColor.blinkError", PrintColor.green, "OK");
-
-    printColor(PrintColor.red, "Uno ", PrintColor.green, "Dos ",
-        PrintColor.magenta, "Tres"); */
   }));
 }
