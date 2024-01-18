@@ -81,6 +81,11 @@ void main() {
     );
 
     printColor(
+      PrintColor.info.value,
+      "This is an information",
+    );
+
+    printColor(
       PrintColor.red.value + PrintColor.italic.value,
       "This is a test",
     );
@@ -99,10 +104,7 @@ void main() {
       "This is an warning",
     );
 
-    printColor(
-      PrintColor.info.value,
-      "This is an information",
-    );
+    printColor(PrintColor.warning, "Windows login ");
 
     /* printColor(
         PrintColor.blinkE, "printColor.blinkError", PrintColor.green, "OK");
