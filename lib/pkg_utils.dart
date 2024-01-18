@@ -67,19 +67,19 @@ String updateWithColor(int color, String? message) {
   String sEmoticon = "";
 
   if (color.binaryIsSet(PrintColor.info.value)) {
-    sEmoticon = ' ℹ️ ';
+    sEmoticon = '🟦';
     color = PrintColor.blue.value + PrintColor.bold.value;
   }
 
   if (color.binaryIsSet(PrintColor.error.value)) {
-    sEmoticon = '⭕';
+    sEmoticon = '🟥';
 
     color = PrintColor.white.value +
         PrintColor.bgRed.value +
         PrintColor.blink.value;
   }
   if (color.binaryIsSet(PrintColor.warning.value)) {
-    sEmoticon = '⚠️⚠';
+    sEmoticon = '🟨';
     color = PrintColor.yellow.value;
   }
 
