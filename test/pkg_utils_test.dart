@@ -73,4 +73,8 @@ void main() {
     value2 = value2.binarySet(2);
     expect(value2, 2);
   }));
+
+  test('printColor()', (() {
+    printColor(PrintColor.green, "printColor() OK");
+  }));
 }

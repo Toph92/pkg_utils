@@ -6,28 +6,28 @@ import 'dart:io';
 
 //SizedBox voidWidget() => const SizedBox.shrink();
 
-void printColor(EnumPrintColor color, String message) {
+void printColor(PrintColor color, String message) {
   String sTmp = '';
   switch (color) {
-    case EnumPrintColor.red:
+    case PrintColor.red:
       sTmp = '\x1B[31m$message\x1B[0m';
       break;
-    case EnumPrintColor.green:
+    case PrintColor.green:
       sTmp = '\x1B[32m$message\x1B[0m';
       break;
-    case EnumPrintColor.magenta:
+    case PrintColor.magenta:
       sTmp = '\x1B[35m$message\x1B[0m';
       break;
-    case EnumPrintColor.cyan:
+    case PrintColor.cyan:
       sTmp = '\x1B[36m$message\x1B[0m';
       break;
-    case EnumPrintColor.white:
+    case PrintColor.white:
       sTmp = '\x1B[37m$message\x1B[0m';
       break;
-    case EnumPrintColor.blue:
+    case PrintColor.blue:
       sTmp = '\x1B[34m$message\x1B[0m';
       break;
-    case EnumPrintColor.yellow:
+    case PrintColor.yellow:
       sTmp = '\x1B[33m$message\x1B[0m';
       break;
     default:
@@ -38,7 +38,7 @@ void printColor(EnumPrintColor color, String message) {
   print(sTmp);
 }
 
-enum EnumPrintColor {
+enum PrintColor {
   red,
   green,
   magenta,
@@ -50,6 +50,7 @@ enum EnumPrintColor {
 }
 
 /*
+
 class OS {
   static bool isMobile() {
     if (kIsWeb) return false;
