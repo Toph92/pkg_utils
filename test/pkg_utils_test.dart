@@ -76,6 +76,15 @@ void main() {
 
   test('printColor()', (() {
     printColor(PrintColor.green, "printColor() OK");
-    printColor(PrintColor.green, null);
+
+    // Marche pas en test
+    printColor(PrintColor.red, "printColor() without newLine...",
+        noNewLine: true);
+
+    printColor(
+      PrintColor.yellow,
+      "OK",
+    );
+    //printColor(PrintColor.green, null);
   }));
 }
