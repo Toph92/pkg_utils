@@ -76,5 +76,6 @@ void main() {
 
   test('printColor()', (() {
     printColor(PrintColor.green, "printColor() OK");
+    printColor(PrintColor.green, null);
   }));
 }

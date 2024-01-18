@@ -6,8 +6,8 @@ import 'dart:io';
 
 //SizedBox voidWidget() => const SizedBox.shrink();
 
-void printColor(PrintColor color, String message) {
-  String sTmp = '';
+void printColor(PrintColor color, String? message) {
+  String? sTmp = '';
   switch (color) {
     case PrintColor.red:
       sTmp = '\x1B[31m$message\x1B[0m';
