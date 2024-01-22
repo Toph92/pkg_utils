@@ -75,31 +75,31 @@ void main() {
   }));
 
   test('printColor()', (() {
-    printColor(
+    Console.printColor(
       PrintColor.red.value,
       "This is a test",
     );
 
-    printColor(
+    Console.printColor(
       PrintColor.red.value + PrintColor.italic.value,
       "This is a test",
     );
-    printColor(
+    Console.printColor(
       PrintColor.white.value + PrintColor.bgGrey.value,
       "This is a test",
     );
 
-    printColor(
+    Console.printColor(
       PrintColor.info.value,
       "This is an information",
     );
 
-    printColor(
+    Console.printColor(
       PrintColor.error.value,
       "This is an error",
     );
 
-    printColor(
+    Console.printColor(
       PrintColor.warning.value,
       "This is an warning",
     );

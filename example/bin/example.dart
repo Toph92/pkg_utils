@@ -3,7 +3,7 @@
 import 'package:pkg_utils/pkg_utils.dart';
 
 void main(List<String> arguments) {
-  printColor(PrintColor.error, "Erreur");
-  printColor(PrintColor.warning, "Ah que test");
-  printColor(PrintColor.info, "Ah que test");
+  Console.printColor(PrintColor.error, "Erreur");
+  Console.printColor(PrintColor.warning, "Ah que test");
+  Console.printColor(PrintColor.info, "Ah que test");
 }
