@@ -135,9 +135,17 @@ extension Epkg3 on double {
   }
 }
 
+// return item not in otherList
 extension WhereNotInExt<T> on Iterable<T> {
-  Iterable<T> whereNotIn(Iterable<T> reject) {
-    final rejectSet = reject.toSet();
+  Iterable<T> whereNotIn(Iterable<T> otherList) {
+    final rejectSet = otherList.toSet();
     return where((el) => !rejectSet.contains(el));
+  }
+
+  /// return a list of item in otherList
+  /// List<Person> list3 = list1.notIn(list2, (person) => person.id);
+  List<T> whereNotInByID(List<T> otherList, int Function(T) getId) {
+    final otherIds = otherList.map((e) => getId(e)).toSet();
+    return where((element) => !otherIds.contains(getId(element))).toList();
   }
 }
