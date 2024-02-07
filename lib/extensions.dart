@@ -144,7 +144,7 @@ extension WhereNotInExt<T> on Iterable<T> {
 
   /// return a list of item in otherList
   /// List<Person> list3 = list1.notIn(list2, (person) => person.id);
-  List<T> whereNotInByID(List<T> otherList, int Function(T) getId) {
+  List<T> whereNotInByID(List<T> otherList, dynamic Function(T) getId) {
     final otherIds = otherList.map((e) => getId(e)).toSet();
     return where((element) => !otherIds.contains(getId(element))).toList();
   }
