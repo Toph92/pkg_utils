@@ -6,6 +6,14 @@
     "consoleFontFamily": "Courier New, monospace",    
     "configurations": [
         {
+                // marche pas ma config :(
+            "name": "Flutter Example",
+            "cwd": "flutter_example",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart"            
+        },
+        {
             "name": "pkg_utils",
             "request": "launch",
             "type": "dart"
