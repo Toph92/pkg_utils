@@ -104,4 +104,48 @@ void main() {
       "This is an warning",
     );
   }));
+
+  test('contentHashCode()', (() {
+    List<Person> list1 = [
+      Person('Alice', 30),
+      Person('Bob', 25),
+      Person('Charlie', 35)
+    ];
+
+    List<Person> list2 = [
+      Person('Alice', 30),
+      Person('Bob', 25),
+      Person('Charlie', 35)
+    ];
+
+    List<Person> list3 = [Person('Alice', 30), Person('Bob', 25)];
+
+    List<Person> list4 = [
+      Person('Alice', 30),
+      Person('Bob', 25),
+      Person('Charlie', 36)
+    ];
+    expect(list1.contentHashCode() == list1.contentHashCode(), true);
+    expect(list1.contentHashCode() == list2.contentHashCode(), true);
+    expect(list1.contentHashCode() == list3.contentHashCode(), false);
+    expect(list1.contentHashCode() == list4.contentHashCode(), false);
+  }));
+}
+
+class Person {
+  final String name;
+  final int age;
+
+  Person(this.name, this.age);
+
+  @override
+  int get hashCode => name.hashCode ^ age.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Person &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          age == other.age;
 }

@@ -148,4 +148,12 @@ extension WhereNotInExt<T> on Iterable<T> {
     final otherIds = otherList.map((e) => getId(e)).toSet();
     return where((element) => !otherIds.contains(getId(element))).toList();
   }
+
+  int contentHashCode() {
+    int result = 0;
+    for (var element in this) {
+      result ^= element.hashCode;
+    }
+    return result;
+  }
 }
