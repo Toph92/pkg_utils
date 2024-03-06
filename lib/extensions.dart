@@ -149,7 +149,7 @@ extension WhereNotInExt<T> on Iterable<T> {
     return where((element) => !otherIds.contains(getId(element))).toList();
   }
 
-  int contentHashCode() {
+  int get contentHashCode {
     int result = 0;
     for (var element in this) {
       result ^= element.hashCode;

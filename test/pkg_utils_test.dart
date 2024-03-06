@@ -125,10 +125,10 @@ void main() {
       Person('Bob', 25),
       Person('Charlie', 36)
     ];
-    expect(list1.contentHashCode() == list1.contentHashCode(), true);
-    expect(list1.contentHashCode() == list2.contentHashCode(), true);
-    expect(list1.contentHashCode() == list3.contentHashCode(), false);
-    expect(list1.contentHashCode() == list4.contentHashCode(), false);
+    expect(list1.contentHashCode == list1.contentHashCode, true);
+    expect(list1.contentHashCode == list2.contentHashCode, true);
+    expect(list1.contentHashCode == list3.contentHashCode, false);
+    expect(list1.contentHashCode == list4.contentHashCode, false);
   }));
 }
 
