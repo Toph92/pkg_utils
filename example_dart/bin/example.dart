@@ -1,6 +1,4 @@
-//import 'package:pkg_utils/pkg_utils.dart';
-
-import 'package:pkg_utils/pkg_utils.dart';
+import 'package:pkg_utils/utils.dart';
 
 void main(List<String> arguments) {
   Console.printColor(PrintColor.error, "Erreur");

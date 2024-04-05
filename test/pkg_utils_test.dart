@@ -1,6 +1,6 @@
 //import 'package:flutter_test/flutter_test.dart';
 import 'package:test/test.dart';
-import 'package:pkg_utils/pkg_utils.dart';
+import 'package:pkg_utils/utils.dart';
 import 'package:pkg_utils/extensions.dart';
 
 void main() {

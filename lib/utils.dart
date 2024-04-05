@@ -1,4 +1,4 @@
-library pkg_utils;
+library utils;
 
 import 'package:pkg_utils/extensions.dart';
 
