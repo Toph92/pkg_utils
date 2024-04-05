@@ -1,7 +1,5 @@
 library pkg_utils;
 
-import 'dart:io';
-
 import 'package:pkg_utils/extensions.dart';
 
 /* /// display message to console
