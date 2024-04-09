@@ -7,6 +7,7 @@ import 'package:pkg_utils/utils.dart';
 import 'package:pkg_utils/extensions.dart';
 import 'dart:async';
 import 'dart:io';
+import 'package:ntp/ntp.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -135,4 +136,60 @@ class NetDatasource {
       return null;
     }
   }
+}
+
+/// return the best time offset in ms between the device and  NTP servers adding localHosts list servers
+Future<int?> getTimeOffset({List<String>? localHosts}) async {
+  int? bestTimeOffset;
+  int? timeOffset;
+
+  List<String> hosts = [
+    'time.google.com',
+    'time.facebook.com',
+    'time.euro.apple.com',
+    'pool.ntp.org'
+  ];
+
+  if (localHosts != null) {
+    hosts.addAll(localHosts);
+  }
+
+  for (String host in hosts) {
+    timeOffset = await _checkTime(host);
+    if (timeOffset != null) {
+      if (bestTimeOffset == null || timeOffset < bestTimeOffset) {
+        bestTimeOffset = timeOffset;
+      }
+    }
+  }
+  return bestTimeOffset;
+}
+
+Future<int?> _checkTime(String lookupAddress) async {
+  DateTime myTime;
+  DateTime ntpTime;
+
+  /// Or you could get NTP current (It will call DateTime.now() and add NTP offset to it)
+  myTime = DateTime.now();
+  int? offset;
+
+  /// Or get NTP offset (in milliseconds) and add it yourself
+  try {
+    offset =
+        await NTP.getNtpOffset(localTime: myTime, lookUpAddress: lookupAddress);
+    ntpTime = myTime.add(Duration(milliseconds: offset));
+  } catch (e) {
+    //print('Error: $e');
+    // on peut deviner que le host n'est pas accessible
+    return null;
+  }
+
+  ntpTime = myTime.add(Duration(milliseconds: offset));
+
+  /* print('\n==== $lookupAddress ====');
+  print('My time: $myTime');
+  print('NTP time: $ntpTime');
+  print('Difference: ${myTime.difference(ntpTime).inMilliseconds}ms');*/
+
+  return myTime.difference(ntpTime).inMilliseconds.abs(); // ms
 }

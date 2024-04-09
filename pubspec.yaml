@@ -1,6 +1,6 @@
 name: pkg_utils
 description: "A new Flutter package project."
-version: 0.0.27
+version: 0.0.28
 homepage:
 
 environment:
@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   http: ^1.2.0
+  ntp: ^2.0.0
   
 
 dev_dependencies:
