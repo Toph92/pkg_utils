@@ -139,7 +139,7 @@ class NetDatasource {
 }
 
 /// return the best time offset in ms between the device and  NTP servers adding localHosts list servers
-Future<int?> getTimeOffset({List<String>? localHosts}) async {
+Future<int?> getTimeOffset({List<String>? additionnalNtpServers}) async {
   int? bestTimeOffset;
   int? timeOffset;
 
@@ -150,8 +150,8 @@ Future<int?> getTimeOffset({List<String>? localHosts}) async {
     'pool.ntp.org'
   ];
 
-  if (localHosts != null) {
-    hosts.addAll(localHosts);
+  if (additionnalNtpServers != null) {
+    hosts.addAll(additionnalNtpServers);
   }
 
   for (String host in hosts) {
