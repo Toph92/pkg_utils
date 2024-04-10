@@ -152,13 +152,9 @@ Future<int?> getTimeOffset(
     'pool.ntp.org'
   ];
 
-  if (disableRegularNtpServers) {
-    hosts.clear();
-  }
+  if (disableRegularNtpServers) hosts.clear();
 
-  if (additionnalNtpServers != null) {
-    hosts.addAll(additionnalNtpServers);
-  }
+  if (additionnalNtpServers != null) hosts.addAll(additionnalNtpServers);
 
   for (String host in hosts) {
     timeOffset = await _checkTime(host);
@@ -181,8 +177,10 @@ Future<int?> _checkTime(String lookupAddress) async {
 
   /// Or get NTP offset (in milliseconds) and add it yourself
   try {
-    offset =
-        await NTP.getNtpOffset(localTime: myTime, lookUpAddress: lookupAddress);
+    offset = await NTP.getNtpOffset(
+        localTime: myTime,
+        lookUpAddress: lookupAddress,
+        timeout: Duration(seconds: 5));
     ntpTime = myTime.add(Duration(milliseconds: offset));
   } catch (e) {
     //print('Error: $e');

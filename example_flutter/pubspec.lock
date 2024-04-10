@@ -147,6 +147,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  ntp:
+    dependency: transitive
+    description:
+      name: ntp
+      sha256: "198db73e5059b334b50dbe8c626011c26576778ee9fc53f4c55c1d89d08ed2d2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   path:
     dependency: transitive
     description:
@@ -161,7 +169,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.26"
+    version: "0.0.30"
   sky_engine:
     dependency: transitive
     description: flutter
