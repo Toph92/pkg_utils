@@ -126,7 +126,7 @@ class Console {
 }
 
 /// return a value from a json string from key and subKey. By exemple : json2var(json, 'credentials', 'pin')
-dynamic json2var(Map<String, dynamic> json, String key, String? subKey) {
+dynamic json2var(Map<String, dynamic> json, String key, [String? subKey]) {
   if (json[key] == null) return null;
   if (json.containsKey(key) == false) return null;
 
