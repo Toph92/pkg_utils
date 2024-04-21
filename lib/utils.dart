@@ -1,5 +1,6 @@
 library utils;
 
+import 'dart:convert';
 import 'package:pkg_utils/extensions.dart';
 
 /* /// display message to console
@@ -122,4 +123,19 @@ class Console {
   static clear() {
     print("\x1B[2J\x1B[0;0H"); // clear entire screen, move cursor to 0;0
   }
+}
+
+/// return a value from a json string from key and subKey. By exemple : json2var(json, 'credentials', 'pin')
+dynamic json2var(Map<String, dynamic> json, String key, String subKey) {
+  if (json[key] == null) return null;
+  if (json.containsKey(key) == false) return null;
+
+  try {
+    if ((jsonDecode(json[key]) as Map).isEmpty) return null;
+  } catch (e) {
+    return null;
+  }
+  if (jsonDecode(json[key]).containsKey(subKey) == false) return null;
+
+  return jsonDecode(json[key])[subKey];
 }
