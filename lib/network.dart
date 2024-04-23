@@ -92,7 +92,8 @@ class NetDatasource {
       defaultHeaders.addAll(jsonHeaders);
     }
     try {
-      var client = HttpClient();
+      HttpClient client = HttpClient();
+      client.connectionTimeout = Duration(seconds: 10);
 
       // Désactive la vérification du certificat SSL
       client.badCertificateCallback =
