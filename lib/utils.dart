@@ -142,12 +142,3 @@ dynamic json2var(Map<String, dynamic> json, String key, [String? subKey]) {
     return jsonDecode(json[key])[subKey];
   }
 }
-
-/// Represents a JSON variable with a name and a value.
-class JsonVariable {
-  final String name;
-  final dynamic value;
-
-  /// Creates a new instance of [JsonVariable] with the given [name] and [value].
-  JsonVariable(this.name, this.value);
-}
