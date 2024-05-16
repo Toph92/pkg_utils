@@ -145,8 +145,11 @@ dynamic json2var(Map<String, dynamic> json, String key, [String? subKey]) {
 
 /// return variable's name. null if not found
 /// call exemple: getVariableName(() => myVariable);
-String? getVariableName(Function() variable) {
+String getVariableName(Function() variable) {
   var name = variable.toString();
+  assert(name != '');
   var parts = name.split(' => ');
-  return parts.length == 3 ? parts[2].trim() : null;
+
+  if (parts.length == 3) return parts[2].trim();
+  throw Exception('variable name not found');
 }
