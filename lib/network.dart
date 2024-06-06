@@ -140,9 +140,11 @@ class NetDatasource {
 }
 
 /// return the best time offset in ms between the device and  NTP servers adding localHosts list servers
+/// if disableRegularNtpServers is true, only localHosts servers are used
 Future<int?> getTimeOffset(
     {List<String>? additionnalNtpServers,
-    bool disableRegularNtpServers = false}) async {
+    bool disableRegularNtpServers = false,
+    bool exitOnFirstNtpServerFound = false}) async {
   int? bestTimeOffset;
   int? timeOffset;
 
@@ -155,13 +157,14 @@ Future<int?> getTimeOffset(
 
   if (disableRegularNtpServers) hosts.clear();
 
-  if (additionnalNtpServers != null) hosts.addAll(additionnalNtpServers);
+  if (additionnalNtpServers != null) hosts.insertAll(0, additionnalNtpServers);
 
   for (String host in hosts) {
     timeOffset = await _checkTime(host);
     if (timeOffset != null) {
       if (bestTimeOffset == null || timeOffset < bestTimeOffset) {
         bestTimeOffset = timeOffset;
+        if (exitOnFirstNtpServerFound) return bestTimeOffset;
       }
     }
   }
