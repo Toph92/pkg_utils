@@ -35,6 +35,7 @@ enum PrintColor {
 
   error(32 + 1024 + 4194304),
   warning(33554432),
+  trace(32 + 67108864),
   info(262144);
 
   final int value;
@@ -85,6 +86,10 @@ class Console {
     if (color.binaryIsSet(PrintColor.warning.value)) {
       sEmoticon = '🟡';
       color = PrintColor.yellow.value;
+    }
+    if (color == PrintColor.trace.value) {
+      sEmoticon = '🟪';
+      //color = PrintColor.yellow.value;
     }
 
     if (color.binaryIsSet(PrintColor.bold.value)) sCode += "\x1B[1m";
