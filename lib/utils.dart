@@ -35,7 +35,9 @@ enum PrintColor {
 
   error(32 + 1024 + 4194304),
   warning(33554432),
-  trace(32 + 67108864),
+  traceUp(32 + 67108864),
+  traceDown(32 + 134217728),
+  traceInfo(32 + 268435456),
   info(262144);
 
   final int value;
@@ -87,8 +89,14 @@ class Console {
       sEmoticon = '🟡';
       color = PrintColor.yellow.value;
     }
-    if (color == PrintColor.trace.value) {
-      sEmoticon = '🟪';
+    if (color == PrintColor.traceUp.value) {
+      sEmoticon = '\x1B[35m\x1B[1m˄\x1B[0m';
+      //color = PrintColor.yellow.value;
+    } else if (color == PrintColor.traceDown.value) {
+      sEmoticon = '\x1B[35m\x1B[1m˅\x1B[0m';
+      //color = PrintColor.yellow.value;
+    } else if (color == PrintColor.traceInfo.value) {
+      sEmoticon = '\x1B[35m\x1B[1mℹ\x1B[0m';
       //color = PrintColor.yellow.value;
     }
 
