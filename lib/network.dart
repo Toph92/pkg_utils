@@ -1,7 +1,7 @@
 library network;
 
 export 'network.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:pkg_utils/utils.dart';
 import 'package:pkg_utils/extensions.dart';
@@ -78,7 +78,73 @@ class NetDatasource {
   String baseUrl;
   NetworkStatus status = NetworkStatus.otherError;
 
-  Future<String?> requestNetwork(
+  Future<String?> requestNetwork({
+    required HttpMethod method,
+    Map<String, dynamic>? jsonBody,
+    Map<String, String>? jsonBodyFields,
+    Map<String, String>? jsonHeaders,
+    required String url,
+  }) async {
+    status = NetworkStatus.otherError;
+    assert(url.isNotEmpty && !url.startsWith('/'));
+
+    var defaultHeaders = {'Content-Type': 'application/x-www-form-urlencoded'};
+    if (jsonHeaders != null) {
+      defaultHeaders.addAll(jsonHeaders);
+    }
+
+    try {
+      final uri = Uri.parse('$baseUrl$url');
+
+      // Configurer la requête en fonction du type de méthode
+      late http.Response response;
+      if (method == HttpMethod.post) {
+        if (jsonBody != null) {
+          // Envoyer une requête POST avec un corps JSON encodé
+          response = await http.post(
+            uri,
+            headers: defaultHeaders,
+            body: jsonEncode(jsonBody),
+          );
+        } else if (jsonBodyFields != null) {
+          // Envoyer une requête POST avec des champs de formulaire
+          response = await http.post(
+            uri,
+            headers: defaultHeaders,
+            body: jsonBodyFields,
+          );
+        } else {
+          response = await http.post(uri, headers: defaultHeaders);
+        }
+      } else {
+        // Envoyer une requête GET
+        response = await http.get(uri, headers: defaultHeaders);
+      }
+
+      connected = true;
+
+      if (response.statusCode == 200) {
+        status = NetworkStatus.ok;
+        return response.body;
+      } else {
+        print("Erreur de serveur : ${response.reasonPhrase}");
+        status = NetworkStatus.otherError;
+      }
+    } catch (e) {
+      connected = false;
+      if (e is http.ClientException) {
+        status = NetworkStatus.connectionRefused;
+      } else {
+        status = NetworkStatus.otherError;
+      }
+      print("Erreur réseau : $e");
+    }
+
+    return null;
+  }
+
+// Ne fonctionne pas en web
+  /* Future<String?> requestNetwork(
       {required HttpMethod method,
       Map<String, dynamic>? jsonBody,
       Map<String, String>? jsonBodyFields,
@@ -93,12 +159,13 @@ class NetDatasource {
     }
     try {
       HttpClient client = HttpClient();
-      client.connectionTimeout = Duration(seconds: 10);
+      client.connectionTimeout = const Duration(seconds: 10);
 
       // Désactive la vérification du certificat SSL
       client.badCertificateCallback =
           ((X509Certificate cert, String host, int port) => true);
-      Request request = Request(method == HttpMethod.post ? 'POST' : 'GET',
+      http.Request request = http.Request(
+          method == HttpMethod.post ? 'POST' : 'GET',
           Uri.parse('$baseUrl$url'));
 
       if (jsonBody != null) {
@@ -109,7 +176,7 @@ class NetDatasource {
       }
       request.headers.addAll(defaultHeaders);
 
-      StreamedResponse response = await request.send();
+      http.StreamedResponse response = await request.send();
       connected = true;
       if (response.statusCode == 200) {
         status = NetworkStatus.ok;
@@ -136,7 +203,7 @@ class NetDatasource {
       Console.printColor(PrintColor.red, "$e]");
       return null;
     }
-  }
+  } */
 }
 
 /// return the best time offset in ms between the device and  NTP servers adding localHosts list servers
