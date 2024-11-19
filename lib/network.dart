@@ -54,7 +54,7 @@ class Token {
   }
 }
 
-enum HttpMethod { post, get }
+enum HttpMethod { post, get, put }
 
 enum NetworkStatus {
   ok("OK"),
@@ -98,7 +98,52 @@ class NetDatasource {
 
       // Configurer la requête en fonction du type de méthode
       late http.Response response;
-      if (method == HttpMethod.post) {
+      switch (method) {
+        // copyright Github copilote. Cela semble bon, pas tout vérifié son code ;)
+        case HttpMethod.post:
+          if (jsonBody != null) {
+            // Envoyer une requête POST avec un corps JSON encodé
+            response = await http.post(
+              uri,
+              headers: defaultHeaders,
+              body: jsonEncode(jsonBody),
+            );
+          } else if (jsonBodyFields != null) {
+            // Envoyer une requête POST avec des champs de formulaire
+            response = await http.post(
+              uri,
+              headers: defaultHeaders,
+              body: jsonBodyFields,
+            );
+          } else {
+            response = await http.post(uri, headers: defaultHeaders);
+          }
+          break;
+        case HttpMethod.get:
+          // Envoyer une requête GET
+          response = await http.get(uri, headers: defaultHeaders);
+          break;
+        case HttpMethod.put:
+          if (jsonBody != null) {
+            // Envoyer une requête PUT avec un corps JSON encodé
+            response = await http.put(
+              uri,
+              headers: defaultHeaders,
+              body: jsonEncode(jsonBody),
+            );
+          } else if (jsonBodyFields != null) {
+            // Envoyer une requête PUT avec des champs de formulaire
+            response = await http.put(
+              uri,
+              headers: defaultHeaders,
+              body: jsonBodyFields,
+            );
+          } else {
+            response = await http.put(uri, headers: defaultHeaders);
+          }
+          break;
+      }
+      /* if (method == HttpMethod.post) {
         if (jsonBody != null) {
           // Envoyer une requête POST avec un corps JSON encodé
           response = await http.post(
@@ -119,7 +164,7 @@ class NetDatasource {
       } else {
         // Envoyer une requête GET
         response = await http.get(uri, headers: defaultHeaders);
-      }
+      } */
 
       connected = true;
 

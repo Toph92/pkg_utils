@@ -1,6 +1,6 @@
 name: pkg_utils
-description: "A new Flutter package project."
-version: 0.0.44
+description: "A collection of utility functions and classes, to make working with Dart packages easier."
+version: 0.0.46
 homepage:
 
 environment:
