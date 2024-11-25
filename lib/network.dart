@@ -3,7 +3,7 @@ library network;
 export 'network.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:pkg_utils/utils.dart';
+//import 'package:pkg_utils/utils.dart';
 import 'package:pkg_utils/extensions.dart';
 import 'dart:async';
 import 'dart:io';
@@ -143,28 +143,6 @@ class NetDatasource {
           }
           break;
       }
-      /* if (method == HttpMethod.post) {
-        if (jsonBody != null) {
-          // Envoyer une requête POST avec un corps JSON encodé
-          response = await http.post(
-            uri,
-            headers: defaultHeaders,
-            body: jsonEncode(jsonBody),
-          );
-        } else if (jsonBodyFields != null) {
-          // Envoyer une requête POST avec des champs de formulaire
-          response = await http.post(
-            uri,
-            headers: defaultHeaders,
-            body: jsonBodyFields,
-          );
-        } else {
-          response = await http.post(uri, headers: defaultHeaders);
-        }
-      } else {
-        // Envoyer une requête GET
-        response = await http.get(uri, headers: defaultHeaders);
-      } */
 
       connected = true;
 
