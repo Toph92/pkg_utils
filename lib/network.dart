@@ -86,7 +86,7 @@ class NetDatasource {
     required String url,
   }) async {
     status = NetworkStatus.otherError;
-    assert(url.isNotEmpty && !url.startsWith('/'));
+    //assert(url.isNotEmpty && !url.startsWith('/'));
 
     var defaultHeaders = {'Content-Type': 'application/x-www-form-urlencoded'};
     if (jsonHeaders != null) {
