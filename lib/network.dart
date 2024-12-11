@@ -69,7 +69,7 @@ enum NetworkStatus {
 
 class NetDatasource {
   NetDatasource({required this.baseUrl, this.disableCertCheck = false}) {
-    assert(baseUrl.right(1) == '/');
+    //assert(baseUrl.right(1) == '/');
     if (disableCertCheck) HttpOverrides.global = MyHttpOverrides();
   }
 
