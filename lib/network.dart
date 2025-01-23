@@ -73,7 +73,7 @@ class NetDatasource {
   }
 
   bool disableCertCheck;
-  bool connected = false;
+  //bool connected = false;
   String baseUrl;
   NetworkStatus status = NetworkStatus.otherError;
   http.Client? httpClient;
@@ -144,7 +144,7 @@ class NetDatasource {
           break;
       }
 
-      connected = true;
+      //connected = true;
       if (httpClient == null) {
         status = NetworkStatus.aborted;
         print("Requête annulée");
@@ -158,7 +158,7 @@ class NetDatasource {
         status = NetworkStatus.otherError;
       }
     } catch (e) {
-      connected = false;
+      //connected = false;
       if (e is http.ClientException) {
         status = NetworkStatus.connectionRefused;
       } else {
