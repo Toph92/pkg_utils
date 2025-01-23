@@ -2,10 +2,7 @@ library network;
 
 export 'network.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart';
 import 'dart:convert';
-//import 'package:pkg_utils/utils.dart';
-import 'package:pkg_utils/extensions.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:ntp/ntp.dart';
@@ -90,7 +87,6 @@ class NetDatasource {
   }) async {
     httpClient ??= http.Client();
     status = NetworkStatus.otherError;
-    //assert(url.isNotEmpty && !url.startsWith('/'));
 
     var defaultHeaders = {'Content-Type': 'application/x-www-form-urlencoded'};
     if (jsonHeaders != null) {
@@ -151,6 +147,7 @@ class NetDatasource {
       connected = true;
       if (httpClient == null) {
         status = NetworkStatus.aborted;
+        print("Requête annulée");
         return null;
       }
       if (response.statusCode == 200) {
