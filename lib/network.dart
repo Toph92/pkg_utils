@@ -62,6 +62,7 @@ enum NetworkStatus {
   timeout("Host unreachable"),
   authorization("Bad authorization"),
   connectionRefused("Connection refused"),
+  aborted("Aborted"),
   otherError("Other error");
 
   final String errorMessage;
@@ -148,7 +149,10 @@ class NetDatasource {
       }
 
       connected = true;
-
+      if (httpClient == null) {
+        status = NetworkStatus.aborted;
+        return null;
+      }
       if (response.statusCode == 200) {
         status = NetworkStatus.ok;
         return response.body;
