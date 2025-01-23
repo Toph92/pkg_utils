@@ -2,6 +2,7 @@ library network;
 
 export 'network.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'dart:convert';
 //import 'package:pkg_utils/utils.dart';
 import 'package:pkg_utils/extensions.dart';
@@ -77,6 +78,7 @@ class NetDatasource {
   bool connected = false;
   String baseUrl;
   NetworkStatus status = NetworkStatus.otherError;
+  http.Client? httpClient;
 
   Future<String?> requestNetwork({
     required HttpMethod method,
@@ -85,6 +87,7 @@ class NetDatasource {
     Map<String, String>? jsonHeaders,
     required String url,
   }) async {
+    httpClient ??= http.Client();
     status = NetworkStatus.otherError;
     //assert(url.isNotEmpty && !url.startsWith('/'));
 
@@ -103,43 +106,43 @@ class NetDatasource {
         case HttpMethod.post:
           if (jsonBody != null) {
             // Envoyer une requête POST avec un corps JSON encodé
-            response = await http.post(
+            response = await httpClient!.post(
               uri,
               headers: defaultHeaders,
               body: jsonEncode(jsonBody),
             );
           } else if (jsonBodyFields != null) {
             // Envoyer une requête POST avec des champs de formulaire
-            response = await http.post(
+            response = await httpClient!.post(
               uri,
               headers: defaultHeaders,
               body: jsonBodyFields,
             );
           } else {
-            response = await http.post(uri, headers: defaultHeaders);
+            response = await httpClient!.post(uri, headers: defaultHeaders);
           }
           break;
         case HttpMethod.get:
           // Envoyer une requête GET
-          response = await http.get(uri, headers: defaultHeaders);
+          response = await httpClient!.get(uri, headers: defaultHeaders);
           break;
         case HttpMethod.put:
           if (jsonBody != null) {
             // Envoyer une requête PUT avec un corps JSON encodé
-            response = await http.put(
+            response = await httpClient!.put(
               uri,
               headers: defaultHeaders,
               body: jsonEncode(jsonBody),
             );
           } else if (jsonBodyFields != null) {
             // Envoyer une requête PUT avec des champs de formulaire
-            response = await http.put(
+            response = await httpClient!.put(
               uri,
               headers: defaultHeaders,
               body: jsonBodyFields,
             );
           } else {
-            response = await http.put(uri, headers: defaultHeaders);
+            response = await httpClient!.put(uri, headers: defaultHeaders);
           }
           break;
       }
@@ -164,6 +167,13 @@ class NetDatasource {
     }
 
     return null;
+  }
+
+  abort() {
+    if (httpClient != null) {
+      httpClient!.close();
+      httpClient = null;
+    }
   }
 
 // Ne fonctionne pas en web
