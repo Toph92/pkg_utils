@@ -173,10 +173,10 @@ class NetDatasource {
   }
 
   abort() {
+    status = NetworkStatus.aborted;
     if (httpClient != null) {
       httpClient!.close();
       httpClient = null;
-      status = NetworkStatus.aborted;
     }
   }
 
