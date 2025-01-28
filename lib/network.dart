@@ -160,7 +160,9 @@ class NetDatasource {
     } catch (e) {
       //connected = false;
       if (e is http.ClientException) {
-        status = NetworkStatus.connectionRefused;
+        if (status != NetworkStatus.aborted) {
+          status = NetworkStatus.connectionRefused;
+        }
       } else {
         status = NetworkStatus.otherError;
       }
