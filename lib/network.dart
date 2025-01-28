@@ -174,6 +174,7 @@ class NetDatasource {
     if (httpClient != null) {
       httpClient!.close();
       httpClient = null;
+      status = NetworkStatus.aborted;
     }
   }
 
