@@ -161,8 +161,7 @@ class NetDatasource {
       }
     } catch (e) {
       //connected = false;
-
-      switch (http.ClientException) {
+      switch (e) {
         case http.ClientException(message: "Connection refused"):
           status = NetworkStatus.connectionRefused;
           break;
