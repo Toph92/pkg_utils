@@ -161,32 +161,24 @@ class NetDatasource {
       }
     } catch (e) {
       //connected = false;
-      switch (e) {
-        case http.ClientException(message: "Connection refused"):
+      if (e is http.ClientException) {
+        if (e.message.contains("Connection refused")) {
           status = NetworkStatus.connectionRefused;
-          break;
-        case http.ClientException(message: "Connection timed out"):
+        } else if (e.message.contains("Connection timed out")) {
           status = NetworkStatus.timeout;
-          break;
-        case http.ClientException(message: "Failed host lookup"):
+        } else if (e.message.contains("Failed host lookup")) {
           status = NetworkStatus.dnsLookup;
-          break;
-
-        case http.ClientException(message: "Connection failed"):
+        } else if (e.message.contains("Connection failed")) {
           status = NetworkStatus.connectionFails;
-          break;
-        case http.ClientException(message: "Bad certificate"):
+        } else if (e.message.contains("Bad certificate")) {
           status = NetworkStatus.authorization;
-          break;
-        case http.ClientException(message: "Software caused connection abort"):
+        } else if (e.message.contains("Software caused connection abort")) {
           status = NetworkStatus.aborted;
-          break;
-        default:
-          status = NetworkStatus.otherError;
-          break;
+        } else {
+          status = NetworkStatus.aborted;                  
       }
       print("Erreur réseau : $e");
-    }
+    } 
 
     return null;
   }
@@ -198,6 +190,7 @@ class NetDatasource {
       httpClient = null;
     }
   }
+  return null;
 
 // Ne fonctionne pas en web
   /* Future<String?> requestNetwork(
