@@ -59,7 +59,9 @@ enum NetworkStatus {
   timeout("Host unreachable"),
   authorization("Bad authorization"),
   connectionRefused("Connection refused"),
+  connectionFails("Connection erreur"),
   aborted("Aborted"),
+  dnsLookup("DNS lookup error"),
   otherError("Other error");
 
   final String errorMessage;
@@ -159,12 +161,30 @@ class NetDatasource {
       }
     } catch (e) {
       //connected = false;
-      if (e is http.ClientException) {
-        if (status != NetworkStatus.aborted) {
+
+      switch (http.ClientException) {
+        case http.ClientException(message: "Connection refused"):
           status = NetworkStatus.connectionRefused;
-        }
-      } else {
-        status = NetworkStatus.otherError;
+          break;
+        case http.ClientException(message: "Connection timed out"):
+          status = NetworkStatus.timeout;
+          break;
+        case http.ClientException(message: "Failed host lookup"):
+          status = NetworkStatus.dnsLookup;
+          break;
+
+        case http.ClientException(message: "Connection failed"):
+          status = NetworkStatus.connectionFails;
+          break;
+        case http.ClientException(message: "Bad certificate"):
+          status = NetworkStatus.authorization;
+          break;
+        case http.ClientException(message: "Software caused connection abort"):
+          status = NetworkStatus.aborted;
+          break;
+        default:
+          status = NetworkStatus.otherError;
+          break;
       }
       print("Erreur réseau : $e");
     }
