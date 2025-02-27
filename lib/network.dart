@@ -175,22 +175,23 @@ class NetDatasource {
         } else if (e.message.contains("Software caused connection abort")) {
           status = NetworkStatus.aborted;
         } else {
-          status = NetworkStatus.aborted;                  
+          status = NetworkStatus.aborted;
+        }
+        print("Erreur réseau : $e");
       }
-      print("Erreur réseau : $e");
-    } 
 
+      return null;
+    }
     return null;
   }
 
-  abort() {
+  void abort() {
     status = NetworkStatus.aborted;
     if (httpClient != null) {
       httpClient!.close();
       httpClient = null;
     }
   }
-  return null;
 
 // Ne fonctionne pas en web
   /* Future<String?> requestNetwork(
