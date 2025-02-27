@@ -1,6 +1,6 @@
 name: pkg_utils
 description: "A collection of utility functions and classes, to make working with Dart packages easier."
-version: 0.0.59
+version: 0.0.60
 homepage:
 
 environment:
