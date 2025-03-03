@@ -48,23 +48,7 @@ class Console {
   static void printColor(dynamic color, String? message) {
     assert(color is PrintColor || color is int);
     if (color is PrintColor) color = color.value;
-    /* if (color2 is PrintColor) color2 = color2.value;
-    if (color3 is PrintColor) color3 = color3.value; */
-
-    /* if (color3 != null &&
-        message3 != null &&
-        color2 != null &&
-        message2 != null) {
-      stdout.write(_updateWithColor(color, message));
-      stdout.write(_updateWithColor(color2, message2));
-      stdout.writeln(_updateWithColor(color3, message3));
-    } else if (color2 != null && message2 != null) {
-      stdout.write(_updateWithColor(color, message));
-      stdout.writeln(_updateWithColor(color2, message2));
-    } else { */
-    //stdout.writeln(_updateWithColor(color, message)); // marche pas en WEB :(
     print(_updateWithColor(color, message));
-    //}
   }
 
 // https://notes.burke.libbey.me/ansi-escape-codes/
