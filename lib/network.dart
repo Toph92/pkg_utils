@@ -90,7 +90,10 @@ class NetDatasource {
     httpClient ??= http.Client();
     status = NetworkStatus.otherError;
 
-    var defaultHeaders = {'Content-Type': 'application/x-www-form-urlencoded'};
+    var defaultHeaders = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    };
     if (jsonHeaders != null) {
       defaultHeaders.addAll(jsonHeaders);
     }
