@@ -4,17 +4,17 @@ export 'network.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
-import 'dart:io';
+//import 'dart:io';
 import 'package:ntp/ntp.dart';
-
-class MyHttpOverrides extends HttpOverrides {
+// BUGDUJOUR
+/* class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
       ..badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
   }
-}
+} */
 
 class Token {
   String accessToken;
@@ -70,8 +70,8 @@ enum NetworkStatus {
 
 class NetDatasource {
   NetDatasource({required this.baseUrl, this.disableCertCheck = false}) {
-    //assert(baseUrl.right(1) == '/');
-    if (disableCertCheck) HttpOverrides.global = MyHttpOverrides();
+    // BUGDUJOUR
+    //if (disableCertCheck) HttpOverrides.global = MyHttpOverrides();
   }
 
   bool disableCertCheck;
