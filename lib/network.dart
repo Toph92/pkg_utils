@@ -92,7 +92,7 @@ class NetDatasource {
 
     var defaultHeaders = {
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Accept': 'application/json',
+      //'Accept': 'application/json',
     };
     if (jsonHeaders != null) {
       defaultHeaders.addAll(jsonHeaders);
