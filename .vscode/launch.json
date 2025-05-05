@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "consoleFontFamily": "Courier New, monospace",    
     "configurations": [
+        {      
+        "name": "OAuth2",
+        "type": "dart",
+        "cwd": "examples/oauth2_oxyone",
+        "request": "launch"            
+        },
         {
                 // marche pas ma config :(
             "name": "Flutter Example",
